@@ -1,0 +1,216 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"GCD": {
+		"prefix": "gcd",
+		"body": [
+			"//GCD(最大公約数)",
+			"ll gcd(ll a, ll b) {",
+			"   if(a < b) return gcd(b, a);",
+			"   if(b == 0) return a;",
+			"   return gcd(b, a % b);",
+			"}"
+		]
+	},
+
+	"LCM": {
+		"prefix": "lcm",
+		"body": [
+			"//LCM(最小公倍数)",
+			"ll lcm(ll a, ll b) {",
+			"   return a / gcd(a, b) * b;  //オーバーフローする場合など 必要に応じて",
+			"}"
+		]
+	},
+
+	"INF": {
+		"prefix": "inf",
+		"body": [
+			"const ll INF = 1LL<<60;"
+		]
+	},
+
+	"MOD": {
+		"prefix": "mod",
+		"body": [
+			"const ll MOD = 1e9 + 7;"
+		]
+	},
+
+	"chmax & chmin": {
+		"prefix": "chm",
+		"body": [
+			"template<class T> inline bool chmax(T& a, T b) { if (a < b) { a = b; return 1; } return 0; }",
+			"template<class T> inline bool chmin(T& a, T b) { if (a > b) { a = b; return 1; } return 0; }"
+		]
+	},
+
+	"min_priority_queue": {
+		"prefix": "min_priority_queue",
+		"body": [
+			"template<typename T> using min_priority_queue = priority_queue<T, vector<T>, greater<T>>;"
+		]
+	},
+
+	"all": {
+		"prefix": "all",
+		"body": [
+			"#define all(x) (x).begin(),(x).end()"
+		]
+	},
+
+	"二項係数：nck": {
+		"prefix": "comb",
+		"body": [
+			"//二項係数 nCk mod p",
+			"//aのp乗を求める",
+			"ll modpow(ll a, int p) {",
+    		"   if(p == 0) return 1;",
+   			"   if(p % 2 == 0) {",
+        	"   int halfP = p / 2;",
+        	"   ll half = modpow(a, halfP);",
+        	"   //a^(p/2)をhalfとして、half*halfを計算",
+        	"   return half * half % MOD;",
+    		"} else {",
+        	"   //pが奇数のときは偶数にするために1減らす",
+        	"   return a * modpow(a, p-1) % MOD;",
+    		"   }",
+			"}",
+
+			"//二項係数の計算",
+			"//10C3 (10*9*8) / (3*2*1)",
+			"//(10*9*8):ansMul (3*2*1):ansDiv",
+			"ll calcComb(int a, int b) {",
+			"   if(b > a - b) return calcComb(a, a - b);",
+				"",
+    		"   ll ansMul = 1;",
+    		"   ll ansDiv = 1;",
+   			"   rep(i, b) {",
+       		"       ansMul *= (a - i);",
+        	"       ansDiv *= (i + 1);",
+        	"       ansMul %= MOD;",
+        	"       ansDiv %= MOD;",
+    		"   }",
+    		"   //ansMul / ansDiv をしたい",
+    		"   //ansDivの逆元を求める",
+			"   ll ans = ansMul * modpow(ansDiv, MOD - 2) % MOD;",
+				"",
+    		"   return ans;",
+			"}"
+		]
+	},
+
+	"素数判定：isPrime": {
+		"prefix": "isprime",
+		"body": [
+			"//素数判定",
+			"bool isPrime(ll n){",
+			"   if (n < 2) return false;",
+			"   for(int i = 2; i < (ll)(sqrt(n) + 1); i++) {",
+			"      if (n % i == 0) return false;",
+			"   }",
+			"   return true;",
+			"}"
+		]
+	},
+
+	"エラトステネスの篩": {
+		"prefix": "Eratosthenes",
+		"body": [
+			"//エラトステネスの篩",
+			"int isPrime[MAX];",
+			"void Eratosthenes(int n) {",
+    		"   for(int i = 0; i <= n; i++) isPrime[i] = 1;",
+   			"   isPrime[0] = 0; isPrime[1] = 0;",
+    		"   for(int i = 2; i <= n; i++) {",
+       		"      if(isPrime[i]) {",
+           	"         for(int j = 2 * i; j <= n; j += i) {",
+            "            isPrime[j] = 0;",                
+           	"         }",	
+        	"      }",
+   			"   }",
+			"}"
+		]
+	},
+
+	"PI": {
+		"prefix": "pi",
+		"body": [
+			"const double PI=acos(-1.0);"
+		]
+	},
+
+	"Direction": {
+		"prefix": "dire",
+		"body": [
+			"const int dx[4] = {-1, 0, 1, 0};",
+			"const int dy[4] = {0, -1, 0, 1};"
+		]	
+	},
+
+	"桁数": {
+		"prefix": "keta",
+		"body": [
+			"//桁数",
+			"bool f(int x) {",
+    		"   int keta = 0;",
+    		"   while(x > 0) {",
+        	"       x /= 10;",
+        	"       keta++;",
+    		"   }",
+    		"   if(keta % 2 == 1) return true;",
+    		"   else return false;",
+			"}"
+		]	
+	},
+
+	"約数列挙": {
+		"prefix": "divisor",
+		"body": [
+			"//約数列挙",
+			"vll d;",
+			"void divisor(ll n) {",
+    		"   for(ll i = 1; i * i <= n; i++) {",
+        	"       if(n % i == 0) {",
+            "           d.push_back(i);",
+            "           if(i * i != n) d.push_back(n / i);",
+        	"       }",
+    		"   }",
+    		"   sort(all(d));",
+    		"   return;",
+			"}"
+		]
+	},
+
+	"素因数分解": {
+		"prefix": "factorize",
+		"body": [
+			"//素因数分解",
+			"vector<pair<ll, int>> factorize(ll n) {",
+   			"\tvector<pair<ll, int>> res;",
+    		"\tfor(ll i = 2; i * i <= n; i++) {",
+        	"\t\tif(n % i) continue;",
+        	"\t\tres.emplace_back(i, 0);",
+        	"\t\twhile(n % i == 0) {",
+            "\t\t\tn /= i;",
+            "\t\t\tres.back().second++;",
+        	"\t\t}",
+    		"\t}",
+    		"\tif(n != 1) res.emplace_back(n, 1);",
+   			"\treturn res;",
+			"}"
+		]
+	},
+}
