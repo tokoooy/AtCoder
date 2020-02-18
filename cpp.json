@@ -138,12 +138,20 @@
 		]
 	},
 
-	"Direction": {
-		"prefix": "dire",
+	"Direction4": {
+		"prefix": "dire4",
 		"body": [
 			"const int dx[4] = {-1, 0, 1, 0};",
 			"const int dy[4] = {0, -1, 0, 1};"
 		]	
+	},
+
+	"Direction8": {
+		"prefix": "dire8",
+		"body": [
+			"const int dx[8] = {0, 1, 1, 1, 0, -1, -1, -1};",
+			"const int dy[8] = {1, 1, 0, -1, -1, -1, 0, 1};"
+		]
 	},
 
 	"桁数": {
