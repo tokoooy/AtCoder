@@ -21,7 +21,7 @@
 		]
 	},
 
-	"INF": {
+	"INF(long long)": {
 		"prefix": "inf",
 		"body": [
 			"const ll INF = 1LL<<60;"
@@ -55,6 +55,11 @@
 		"body": [
 			"#define all(x) (x).begin(),(x).end()"
 		]
+	},
+
+	"reverse_all": {
+		"prefix": "rall",
+		"body": "#define rall(x) (x).rbegin(),(x).rend()"
 	},
 
 	"二項係数：nck": {
@@ -218,11 +223,6 @@
 		"body": "bool cmp(pint a, pint b) {return a.second < b.second;}"
 	},
 
-	"reverse_all": {
-		"prefix": "rall",
-		"body": "#define rall(x) (x).rbegin(),(x).rend()"
-	},
-
 	"Union-Find": {
 		"prefix": "unionfind",
 		"body": [
@@ -257,5 +257,31 @@
 			    "\tpar[x] = y;",
 			"}"
 		]
+	},
+
+	"priority_queue_greater": {
+		"prefix": "pqg",
+		"body": [
+			"// int 型の要素を持ち、最も小さい値を取り出す形の priority_queue を定義する場合",
+			"priority_queue<int, vector<int>, greater<int>> $1;"
+		]
+	},
+
+	"priority_queue_less": {
+		"prefix": "pql",
+		"body":[
+			"// int 型の要素を持ち、最も大きい値を取り出す形の priority_queue を定義する場合",
+			"priority_queue<int, vector<int>, less<int>> $1;"
+		]	
+	},
+
+	"builtin_popcount": {
+		"prefix": "popcnt",
+		"body": "__builtin_popcount($1)"
+	},
+
+	"INF(int)":{
+		"prefix": "inf",
+		"body": "const int INF = 1001001001;"
 	}
 }
