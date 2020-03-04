@@ -22,7 +22,7 @@
 	},
 
 	"INF(long long)": {
-		"prefix": "inf",
+		"prefix": "infl",
 		"body": [
 			"const ll INF = 1LL<<60;"
 		]
@@ -223,7 +223,7 @@
 		"body": "bool cmp(pint a, pint b) {return a.second < b.second;}"
 	},
 
-	"Union-Find": {
+	"Union-Find(Old)": {
 		"prefix": "unionfind",
 		"body": [
 			"//親の番号",
@@ -281,7 +281,31 @@
 	},
 
 	"INF(int)":{
-		"prefix": "inf",
+		"prefix": "infi",
 		"body": "const int INF = 1001001001;"
+	},
+
+	"Union-Find(New)": {
+		"prefix": "uf",
+		"body": [
+			"struct UnionFind {",
+			"\tvi d;",
+			"\tUnionFind(int n = 0): d(n, -1) {}   //子：親のID　親：-サイズ",
+			"\tint find(int x) {",
+			"\t\tif(d[x] < 0) return x;",
+			"\t\treturn d[x] = find(d[x]);",
+			"\t}",
+			"\tbool unite(int x, int y) {",
+			"\t\tx = find(x); y = find(y);",
+			"\t\tif(x == y) return false;",
+			"\t\tif(d[x] > d[y]) swap(x, y); //サイズが大きい方にくっつける。 （-サイズ）なので数が小さい方がサイズは大きい",
+			"\t\td[x] += d[y];",
+					"\t\td[y] = x;",
+					"\t\treturn true;",
+				"\t}",
+				"\tbool same(int x, int y) { return find(x) == find(y); }",
+				"\tint size(int x) {return -d[find(x)];}",
+			"};"
+		]
 	}
 }
