@@ -1,12 +1,24 @@
 {
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
 	"GCD": {
 		"prefix": "gcd",
 		"body": [
 			"//GCD(最大公約数)",
 			"ll gcd(ll a, ll b) {",
-			"   if(a < b) return gcd(b, a);",
-			"   if(b == 0) return a;",
-			"   return gcd(b, a % b);",
+			"\treturn b ? gcd(b, a % b) : a;",
 			"}"
 		]
 	},
@@ -108,12 +120,12 @@
 		"body": [
 			"//素数判定",
 			"bool isPrime(ll n){",
-			"   if (n < 2) return false;",
-			"   for(int i = 2; i < (ll)(sqrt(n) + 1); i++) {",
-			"      if (n % i == 0) return false;",
-			"   }",
-			"   return true;",
-			"}"
+				"\tif(n == 1) return false;",
+				"\tfor(ll i = 2; i * i <= n; i++) {",
+					"\t\tif(n % i == 0) return false;",
+				"\t}",
+				"\treturn true;",
+ 			"}"
 		]
 	},
 
@@ -160,27 +172,26 @@
 	},
 
 	"桁数": {
-		"prefix": "keta",
+		"prefix": "digit",
 		"body": [
 			"//桁数",
-			"bool f(int x) {",
-    		"   int keta = 0;",
+			"int calc_digit(ll x) {",
+    		"   int res = 0;",
     		"   while(x > 0) {",
         	"       x /= 10;",
-        	"       keta++;",
+        	"       res++;",
     		"   }",
-    		"   if(keta % 2 == 1) return true;",
-    		"   else return false;",
+    		"   return res;",
 			"}"
 		]	
 	},
 
 	"約数列挙": {
-		"prefix": "divisor",
+		"prefix": "enum_divisor",
 		"body": [
 			"//約数列挙",
 			"vll d;",
-			"void divisor(ll n) {",
+			"void enum_divisor(ll n) {",
     		"   for(ll i = 1; i * i <= n; i++) {",
         	"       if(n % i == 0) {",
             "           d.push_back(i);",
@@ -194,22 +205,27 @@
 	},
 
 	"素因数分解": {
-		"prefix": "factorize",
+		"prefix": "prime_factorize",
 		"body": [
 			"//素因数分解",
-			"vector<pair<ll, int>> factorize(ll n) {",
-   			"\tvector<pair<ll, int>> res;",
-    		"\tfor(ll i = 2; i * i <= n; i++) {",
-        	"\t\tif(n % i) continue;",
-        	"\t\tres.emplace_back(i, 0);",
-        	"\t\twhile(n % i == 0) {",
-            "\t\t\tn /= i;",
-            "\t\t\tres.back().second++;",
-        	"\t\t}",
-    		"\t}",
-    		"\tif(n != 1) res.emplace_back(n, 1);",
-   			"\treturn res;",
-			"}"
+			"vector<pair<ll, ll>> prime_factorize(ll n) {",
+    			"\tvector<pair<ll, ll>> res;",
+    			"\tfor(ll i = 2; i * i <= n; i++) {",
+        			"\t\tif(n % i != 0) continue;",
+        			"\t\tll ex = 0;",
+					"",
+        			"\t\twhile(n % i == 0) {",
+            			"\t\t\tex++;",
+            			"\t\t\tn /= i;",
+        			"\t\t}",
+					"",
+        			"\t\tres.push_back({i, ex});",
+    			"\t}",
+				"",
+    			"\tif(n != 1) res.push_back({n, 1});",
+    			"\treturn res;",
+			"}",
+			"//const auto &res = prime_factorize(n);"
 		]
 	},
 
@@ -306,6 +322,17 @@
 				"\tbool same(int x, int y) { return find(x) == find(y); }",
 				"\tint size(int x) {return -d[find(x)];}",
 			"};"
+		]
+	},
+
+	"isPalindrome": {
+		"prefix": "isPar",
+		"body": [
+			"bool isPalindrome(string s) {",
+				"\tstring t = s;",
+				"\treverse(all(t));",
+				"\treturn s == t;",
+			"}"
 		]
 	}
 }
